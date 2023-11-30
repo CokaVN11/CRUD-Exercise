@@ -13,7 +13,7 @@
 
         <div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
           <div class="modal-dialog" role="document">
-            <form action="" id="addUserForm">
+            <form action="/users" id="addUserForm" method="POST">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="userModalTitle">
@@ -114,13 +114,19 @@
             <td>{{username}}</td>
             <td>
               {{#if isAdmin}}<span class="badge bg-label-primary me-1">Admin</span>{{else}}<span
-                class="badge bg-label-secondary me-1">Admin</span>{{/if}}
+                class="badge bg-label-secondary me-1">Member</span>{{/if}}
             </td>
             <td>{{mobile}}</td>
             <td>
               <i role="button" class="bx bx-edit-alt text-info me-3" data-bs-toggle="modal"
-                data-bs-target="#editUserModal"></i>
-              <i role="button" class="bx bx-trash text-danger delete-btn"></i>
+                data-bs-target="#editUserModal" onclick="showEditUserModal(this)"
+                data-id="{{id}}"
+                data-first-name="{{firstName}}"
+                data-last-name="{{lastName}}"
+                data-username="{{username}}"
+                data-mobile="{{mobile}}"
+                data-is-admin="{{isAdmin}}"></i>
+              <i role="button" class="bx bx-trash text-danger delete-btn" data-id="{{id}}"></i>
             </td>
           </tr>
           {{/each}}
@@ -166,7 +172,7 @@
 
   <div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <form action="" id="editUserForm">
+      <form action="" id="editUserForm" onsubmit="editUser(event)">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">
